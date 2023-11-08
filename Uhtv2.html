@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конвертер температур</title>
+</head>
+<body>
+    <label for="fahrenheit">Температура за Фаренгейтом:</label>
+    <input type="text" id="fahrenheit" oninput="convertToFahrenheit()"><br>
+
+    <label for="celsius">Температура за Цельсієм:</label>
+    <input type="text" id="celsius" oninput="convertToCelsius"><br>
+
+    <script>
+        function convertToFahrenheit() {
+            let celsius = parseFloat(document.getElementById("celsius").value);
+            let fahrenheit = (celsius * 9/5) + 32;
+            document.getElementById("fahrenheit").value = fahrenheit.toFixed(2);
+        }
+
+        function convertToCelsius() {
+            let fahrenheit = parseFloat(document.getElementById("fahrenheit").value);
+            let celsius = (fahrenheit - 32) * 5/9;
+            document.getElementById("celsius").value = celsius.toFixed(2);
+        }
+    </script>
+</body>
+</html>
