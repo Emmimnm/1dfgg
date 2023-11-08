@@ -3,26 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конвертер температур</title>
+    <title>Перевірка таблиці множення</title>
 </head>
 <body>
-    <label for="fahrenheit">Температура за Фаренгейтом:</label>
-    <input type="text" id="fahrenheit" oninput="convertToFahrenheit()"><br>
-
-    <label for="celsius">Температура за Цельсієм:</label>
-    <input type="text" id="celsius" oninput="convertToCelsius"><br>
+    <h1>Перевірка таблиці множення</h1>
+    <p id="score">Загальний рахунок: 0</p>
+    
+    <button onclick="generateTask()">Наступне завдання</button>
+    <br>
+    <p id="task"></p>
+    <input type="text" id="answer">
+    <button onclick="checkAnswer()">Перевірити</button>
+    <p id="result"></p>
 
     <script>
-        function convertToFahrenheit() {
-            let celsius = parseFloat(document.getElementById("celsius").value);
-            let fahrenheit = (celsius * 9/5) + 32;
-            document.getElementById("fahrenheit").value = fahrenheit.toFixed(2);
+        let score = 0;
+
+        function generateTask() {
+            let num1 = Math.floor(Math.random() * 10) + 1;
+            let num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById("task").textContent = `Скільки буде ${num1} * ${num2} ?`;
+            document.getElementById("answer").value = "";
+            document.getElementById("result").textContent = "";
         }
 
-        function convertToCelsius() {
-            let fahrenheit = parseFloat(document.getElementById("fahrenheit").value);
-            let celsius = (fahrenheit - 32) * 5/9;
-            document.getElementById("celsius").value = celsius.toFixed(2);
+        function checkAnswer() {
+            let userAnswer = parseInt(document.getElementById("answer").value);
+            let task = document.getElementById("task").textContent;
+            let nums = task.match(/\d+/g);
+            let correctAnswer = nums[0] * nums[1];
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                document.getElementById("score").textContent = `Загальний рахунок: ${score}`;
+                document.getElementById("result").textContent = "Правильно!";
+            } else {
+                document.getElementById("result").textContent = "Неправильно. Спробуй ще раз.";
+            }
         }
     </script>
 </body>
